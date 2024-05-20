@@ -1,25 +1,48 @@
-import React from "react";
-import './Navbar.css'
 
-function Navbar() {
-    const scrollToSection = (sectionId) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      };
+import React, { useState } from "react";
 
+import styles from "./Navbar.module.css";
+import { getImageUrl } from "../../utils";
 
-      return(
-        <nav className="navbar">
-        <ul className="nav-links">
-          <li onClick={() => scrollToSection('home')}>Home</li>
-          <li onClick={() => scrollToSection('about')}>About</li>
-          <li onClick={() => scrollToSection('services')}>Services</li>
-          <li onClick={() => scrollToSection('contact')}>Contact</li>
-        </ul>
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+      <nav className={styles.navbar}>
+        <a className={styles.title} href="/">
+          Portfolio
+        </a>
+        <div className={styles.menu}>
+          <img
+              className={styles.menuBtn}
+              src={
+                menuOpen
+                    ? getImageUrl("nav/closeIcon.png")
+                    : getImageUrl("nav/menuIcon.png")
+              }
+              alt="menu-button"
+              onClick={() => setMenuOpen(!menuOpen)}
+          />
+          <ul
+              className={`${styles.menuItems} ${menuOpen && styles.menuOpen}`}
+              onClick={() => setMenuOpen(false)}
+          >
+            <li>
+              <a href="#about">About</a>
+            </li>
+            <li>
+              <a href="#experience">Experience</a>
+            </li>
+            <li>
+              <a href="#projects">Projects</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
       </nav>
-      );
+  );
 };
 
 export default Navbar;

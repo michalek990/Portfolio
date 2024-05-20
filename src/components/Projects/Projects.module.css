@@ -1,0 +1,24 @@
+.projects {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .project {
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: transform 0.3s ease;
+  }
+  
+  .project:hover {
+    transform: scale(1.05);
+  }
+  

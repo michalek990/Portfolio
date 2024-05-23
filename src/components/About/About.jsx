@@ -6,7 +6,7 @@ import cursorIcon from "../../assets/about/cursorIcon.png";
 import serverIcon from "../../assets/about/serverIcon.png";
 import uiIcon from "../../assets/about/uiIcon.png";
 
-export const About = () => {
+const About = () => {
     return (
         <section className={styles.container} id="about">
             <h2 className={styles.title}>About</h2>
@@ -52,3 +52,5 @@ export const About = () => {
         </section>
     );
 };
+
+export default About;

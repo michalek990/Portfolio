@@ -1,21 +1,34 @@
 import React from 'react';
 import styles from './Contact.module.css';
-
+import emailIcon from '../../assets/contact/emailIcon.png';
+import githubIcon from '../../assets/contact/githubIcon.png';
+import linkedinIcon from '../../assets/contact/linkedinIcon.png';
 const Contact = () => {
-  return (
-    <section id="contact" className={styles.contact}>
-      <h2>Contact Me</h2>
-      <form>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" required />
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-        <label htmlFor="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  );
+    return (
+        <footer id="contact" className={styles.container}>
+            <div className={styles.text}>
+                <h2>Contact</h2>
+                <p>Feel free to reach out!</p>
+            </div>
+            <ul className={styles.links}>
+                <li className={styles.link}>
+                    <img src={emailIcon} alt="Email icon" />
+                    <a href="mailto:myemail@email.com">myemail@email.com</a>
+                </li>
+                <li className={styles.link}>
+                    <img
+                        src={githubIcon}
+                        alt="LinkedIn icon"
+                    />
+                    <a href="https://www.linkedin.com/myname">linkedin.com/myname</a>
+                </li>
+                <li className={styles.link}>
+                    <img src={linkedinIcon} alt="Github icon" />
+                    <a href="https://www.github.com/myname">github.com/myname</a>
+                </li>
+            </ul>
+        </footer>
+    );
 };
 
 export default Contact;

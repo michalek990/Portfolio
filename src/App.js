@@ -1,8 +1,9 @@
 import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
-import {About} from "./components/About/About";
-import {Hero} from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Hero from "./components/Hero/Hero";
+import Contact from "./components/Contact/Contact";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
         <Hero />
         <About />
+      <Contact />
     </div>
   );
 }

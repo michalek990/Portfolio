@@ -1,43 +1,35 @@
-name: Node.js CI
+name: CI
 
 on:
   push:
-    branches: [ "master", "develop" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master", "develop" ]
+    branches:
+      - master
 
 jobs:
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [14, 16, 18]  # Sprawdza różne wersje Node.js
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
+
       - name: Install dependencies
-        run: npm ci
-      
-      - name: Build the project
-        run: npm run build --if-present
-      
+        run: npm install
+
       - name: Run tests
         run: npm test
-      
-      - name: Upload coverage report
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage
+
+      - name: Build application
+        run: npm run build

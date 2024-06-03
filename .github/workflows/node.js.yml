@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-test:
@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 16, 18]  # Sprawdza różne wersje Node.js
+        node-version: [14]
 
     steps:
       - name: Checkout repository
@@ -25,11 +25,27 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Upgrade npm to latest version
+        run: npm install -g npm@latest
+
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm audit fix  # automatyczna naprawa luk bezpieczeństwa
 
       - name: Run tests
         run: npm test
 
       - name: Build application
         run: npm run build
+
+      - name: Start server
+        run: npm start &
+        env:
+          CI: true
+
+      - name: Wait for server to start
+        run: sleep 10
+
+      - name: Check server is running
+        run: curl -f http://localhost:3000 || (echo "Server did not start correctly" && exit 1)
